@@ -26,6 +26,16 @@ public class ProductServiceImpl implements ProductService{
         return products.get(id);
     }
 
+    @Override
+    public Product saveOrUpdateProduct(Product product) {
+        Integer id = products.size() + 1;
+        product.setId(id);
+
+        products.put(id, product);
+
+        return product;
+    }
+
     private void loadProducts() {
         products = new HashMap<>();
 
