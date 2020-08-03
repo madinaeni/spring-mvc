@@ -28,12 +28,19 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product saveOrUpdateProduct(Product product) {
-        Integer id = products.size() + 1;
-        product.setId(id);
 
-        products.put(id, product);
+        if( product != null) {
+            if (product.getId() == null) {
+                Integer id = products.size() + 1;
+                product.setId(id);
+                products.put(id, product);
+            }
+            products.put(product.getId(), product);
 
-        return product;
+            return product;
+        } else {
+            throw new RuntimeException("Product can't be null");
+        }
     }
 
     private void loadProducts() {
