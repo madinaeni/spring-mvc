@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+@RequestMapping("/product")
 @Controller
 public class ProductController {
 
@@ -19,49 +20,49 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @RequestMapping("/products")
+    @RequestMapping("/list")
     public String listProducts(Model model) {
 
         model.addAttribute("products", productService.listAllProducts());
 
-        return "products";
+        return "product/list";
     }
 
-    @RequestMapping("/product/{id}")
+    @RequestMapping("/show/{id}")
     public String getProduct(@PathVariable Integer id, Model model) {
 
         model.addAttribute("product", productService.getProductById(id));
 
-        return "product";
+        return "product/show";
     }
 
-    @RequestMapping("product/edit/{id}")
+    @RequestMapping("/edit/{id}")
     public String editProduct(@PathVariable Integer id, Model model) {
         model.addAttribute("product", productService.getProductById(id));
 
-        return "productform";
+        return "product/productform";
     }
 
-    @RequestMapping("product/delete/{id}")
+    @RequestMapping("/delete/{id}")
     public String deleteProduct(@PathVariable Integer id) {
         productService.deleteProductById(id);
 
-        return "redirect:/products";
+        return "redirect:/product/list";
     }
 
-    @RequestMapping("/product/new")
+    @RequestMapping("/new")
     public String newProduct(Model model) {
 
         model.addAttribute("product", new Product());
 
-        return "productform";
+        return "product/productform";
     }
 
-    @RequestMapping(value = "/product", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public String saveOrUpdateProduct(Product product) {
         Product savedProduct = productService.saveOrUpdateProduct(product);
 
-        return "redirect:/product/" + savedProduct.getId();
+        return "redirect:/product/show/" + savedProduct.getId();
     }
 
 }
