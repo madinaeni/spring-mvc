@@ -36,7 +36,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void testList() throws Exception {
+    public void testListProduct() throws Exception {
         List<Product> products = new ArrayList<>();
         products.add(new Product());
         products.add(new Product());
@@ -51,7 +51,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void testShow() throws Exception {
+    public void testShowProduct() throws Exception {
         Integer id = 1;
 
         when(productService.getProductById(id)).thenReturn(new Product());
@@ -63,7 +63,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void testEdit() throws Exception {
+    public void testEditProduct() throws Exception {
         Integer id = 1;
 
         when(productService.getProductById(id)).thenReturn(new Product());
@@ -75,7 +75,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void testNew() throws Exception{
+    public void testNewProduct() throws Exception{
 
         verifyNoInteractions(productService);
 
@@ -86,7 +86,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void testDelete() throws Exception{
+    public void testDeleteProduct() throws Exception{
         Integer id = 1;
 
         mockMvc.perform(get("/product/delete/1"))
@@ -97,7 +97,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void testSaveOrUpdate() throws Exception{
+    public void testSaveOrUpdateProduct() throws Exception{
         Integer id = 1;
         String description = "Test Description";
         BigDecimal price = new BigDecimal("12.00");
